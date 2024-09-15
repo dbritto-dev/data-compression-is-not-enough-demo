@@ -1,0 +1,10 @@
+[project]
+name = "optimizing-json-response"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "brotli>=1.1.0",
+    "flask>=3.0.3",
+]
