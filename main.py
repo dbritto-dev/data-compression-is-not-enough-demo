@@ -18,7 +18,7 @@ def hello_world():
 
 
 @app.route("/api/demo")
-def optimized_json_response():
+def api_demo():
     data = read_json_response(path.Path(__file__).parent / "data.json") * 5
 
     compact = request.args.get("compact") == "true"
@@ -26,7 +26,7 @@ def optimized_json_response():
     normalize = request.args.get("normalize") == "true"
     lean = request.args.get("lean") == "true"
 
-    response_headers = {"content-type": "application/json"}
+    response_headers = {}
 
     response_data = data.copy()
 
@@ -54,7 +54,9 @@ def optimized_json_response():
         response_data = brotli.compress(response_data)
         response_headers["content-encoding"] = "br"
 
-    return Response(response_data, headers=response_headers)
+    return Response(
+        response_data, content_type="application/json", headers=response_headers
+    )
 
 
 def read_json_response(filepath: path.Path) -> list[dict]:
